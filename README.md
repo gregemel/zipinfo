@@ -7,3 +7,10 @@
     * Google Elevation
     
 #### for Cayuse code challenge 
+
+sample usage:
+* run service on port 8080 (default)
+* using browser:
+    * http://localhost:8080/api/v1/zipinfo/97201
+    
+    
