@@ -1,0 +1,12 @@
+package com.emelgreg.zipinfo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class ZipinfoApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(ZipinfoApplication.class, args);
+	}
+}
