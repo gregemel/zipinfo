@@ -2,6 +2,7 @@ package com.emelgreg.zipinfo.services;
 
 import com.emelgreg.zipinfo.models.CityTemp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -10,6 +11,11 @@ public class TemperatureImpl implements Temperature {
 
     @Autowired
     private RestTemplate restTemplate;
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 
     @Autowired
     private OpenWeatherParser parser;
