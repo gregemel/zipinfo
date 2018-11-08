@@ -2,7 +2,9 @@ package com.emelgreg.zipinfo.services;
 
 import com.emelgreg.zipinfo.models.LocationInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class LocationImpl implements Location {
     @Autowired
     private Temperature temperatureService;
