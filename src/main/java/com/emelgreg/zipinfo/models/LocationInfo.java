@@ -6,6 +6,12 @@ public class LocationInfo {
     private String timeZone;
     private String elevation;
 
+    public LocationInfo(String temperature, String timeZone, String elevation) {
+        this.temperature = temperature;
+        this.timeZone = timeZone;
+        this.elevation = elevation;
+    }
+
     public String getTemperature() {
         return temperature;
     }
