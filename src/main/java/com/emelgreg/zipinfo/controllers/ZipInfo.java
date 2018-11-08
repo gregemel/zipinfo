@@ -16,6 +16,10 @@ public class ZipInfo {
 
     @GetMapping("/{zip}")
     public String get(@PathVariable("zip") String zip) {
-        return locationService.getLocationInfo(zip).toString();
+        if(zip.length() < 5) {
+            return "This service requires a valid zip code.";
+        } else {
+            return locationService.getLocationInfo(zip).toString();
+        }
     }
 }
