@@ -36,6 +36,7 @@ public class LocationSpec {
         LocationInfo infoText = target.getLocationInfo(zipCode);
 
         assert(infoText != null);
+        assert(!infoText.getCity().isEmpty());
         assert(!infoText.getTemperature().isEmpty());
         verify(temperatureServiceMock, times(1)).get(anyString());
     }
