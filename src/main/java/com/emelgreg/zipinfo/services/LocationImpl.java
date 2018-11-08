@@ -1,5 +1,6 @@
 package com.emelgreg.zipinfo.services;
 
+import com.emelgreg.zipinfo.models.CityTemp;
 import com.emelgreg.zipinfo.models.LocationInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,8 @@ public class LocationImpl implements Location {
 
     @Override
     public LocationInfo getLocationInfo(String zip) {
-        return new LocationInfo(temperatureService.get(zip), timeZoneService.get(zip), elevationService.get(zip));
+        CityTemp cityTemp = temperatureService.get(zip);
+        return new LocationInfo(cityTemp.getCity(), cityTemp.getTemperature(),
+                timeZoneService.get(zip), elevationService.get(zip));
     }
 }

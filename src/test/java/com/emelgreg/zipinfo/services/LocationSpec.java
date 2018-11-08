@@ -1,5 +1,6 @@
 package com.emelgreg.zipinfo.services;
 
+import com.emelgreg.zipinfo.models.CityTemp;
 import com.emelgreg.zipinfo.models.LocationInfo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,7 +31,7 @@ public class LocationSpec {
 
     @Test
     public void shouldCallTemperatureServiceWithZip() {
-        when(temperatureServiceMock.get(zipCode)).thenReturn("72F");
+        when(temperatureServiceMock.get(zipCode)).thenReturn(new CityTemp("pdx", "72F"));
 
         LocationInfo infoText = target.getLocationInfo(zipCode);
 
@@ -41,6 +42,7 @@ public class LocationSpec {
 
     @Test
     public void shouldCallTimeZoneServiceWithZip() {
+        when(temperatureServiceMock.get(zipCode)).thenReturn(new CityTemp("pdx", "72F"));
         when(timeZoneServiceMock.get(zipCode)).thenReturn("Pacific");
 
         LocationInfo infoText = target.getLocationInfo(zipCode);
@@ -52,6 +54,7 @@ public class LocationSpec {
 
     @Test
     public void shouldCallElevationServiceWithZip() {
+        when(temperatureServiceMock.get(zipCode)).thenReturn(new CityTemp("pdx", "72F"));
         when(elevationServiceMock.get(zipCode)).thenReturn("200ft");
 
         LocationInfo infoText = target.getLocationInfo(zipCode);

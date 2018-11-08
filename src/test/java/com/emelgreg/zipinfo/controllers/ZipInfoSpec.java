@@ -36,11 +36,11 @@ public class ZipInfoSpec {
     @Test
     public void shouldGetZipInformationFromLocationService() throws Exception {
         when(locationServiceMock.getLocationInfo(zipCode)).thenReturn(
-                new LocationInfo("temp", "timezone", "elevation"));
+                new LocationInfo("city", "temp", "timezone", "elevation"));
 
         this.mockMvc.perform(get("/api/v1/zipinfo/" + zipCode)).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString(
-                        "LocationInfo{zip='null', temperature='temp', timeZone='timezone', elevation='elevation'}")));
+                        "At the location city, the temperature is temp, the timezone is timezone, and the elevation is elevation.")));
 
         verify(locationServiceMock, times(1)).getLocationInfo(anyString());
     }
@@ -48,7 +48,7 @@ public class ZipInfoSpec {
     @Test
     public void shouldReturnErrorMessageWhenZipCodeIsLessThan5Digits() throws Exception {
         when(locationServiceMock.getLocationInfo(zipCode)).thenReturn(
-                new LocationInfo("temp", "timezone", "elevation"));
+                new LocationInfo("city", "temp", "timezone", "elevation"));
 
         this.mockMvc.perform(get("/api/v1/zipinfo/1234")).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString(
@@ -60,7 +60,7 @@ public class ZipInfoSpec {
     @Test
     public void shouldReturn404WhenZipCodeIsNotProvided() throws Exception {
         when(locationServiceMock.getLocationInfo(zipCode)).thenReturn(
-                new LocationInfo("temp", "timezone", "elevation"));
+                new LocationInfo("city", "temp", "timezone", "elevation"));
 
         this.mockMvc.perform(get("/api/v1/zipinfo/")).andDo(print()).andExpect(status().isNotFound());
     }
