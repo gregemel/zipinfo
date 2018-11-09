@@ -8,7 +8,7 @@
     
     * for Cayuse code challenge 
 
-##sample usage:
+## sample usage:
 * enter proper api keys for Open Weather and Google in application.properties
 * run service on port 8080 (default)
 * using browser:
