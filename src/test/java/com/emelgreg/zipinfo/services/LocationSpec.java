@@ -56,12 +56,12 @@ public class LocationSpec {
     @Test
     public void shouldCallElevationServiceWithZip() {
         when(temperatureServiceMock.get(zipCode)).thenReturn(new CityTemp("pdx", "72F", "45", "-122"));
-        when(elevationServiceMock.get(zipCode)).thenReturn("200ft");
+        when(elevationServiceMock.get("45", "-122")).thenReturn("200ft");
 
         LocationInfo infoText = target.getLocationInfo(zipCode);
 
         assert(infoText != null);
         assert(!infoText.getElevation().isEmpty());
-        verify(elevationServiceMock, times(1)).get(anyString());
+        verify(elevationServiceMock, times(1)).get(anyString(), anyString());
     }
 }

@@ -20,6 +20,7 @@ public class LocationImpl implements Location {
     public LocationInfo getLocationInfo(String zip) {
         CityTemp cityTemp = temperatureService.get(zip);
         return new LocationInfo(cityTemp.getCity(), cityTemp.getTemperature(),
-                timeZoneService.get(cityTemp.getLatitude(), cityTemp.getLongitude()), elevationService.get(zip));
+                timeZoneService.get(cityTemp.getLatitude(), cityTemp.getLongitude()),
+                elevationService.get(cityTemp.getLatitude(), cityTemp.getLongitude()));
     }
 }
