@@ -22,6 +22,7 @@ public class OpenWeatherParserSpec {
 
         assert(cityTemp.getCity().equals("Portland"));
         assert(cityTemp.getTemperature().equals("39F"));
+        assert(cityTemp.getLongitude().equals("-122.67"));
+        assert(cityTemp.getLatitude().equals("45.52"));
     }
-
 }

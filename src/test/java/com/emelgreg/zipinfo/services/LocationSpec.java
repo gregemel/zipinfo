@@ -31,7 +31,7 @@ public class LocationSpec {
 
     @Test
     public void shouldCallTemperatureServiceWithZip() {
-        when(temperatureServiceMock.get(zipCode)).thenReturn(new CityTemp("pdx", "72F"));
+        when(temperatureServiceMock.get(zipCode)).thenReturn(new CityTemp("pdx", "72F", "45", "-122"));
 
         LocationInfo infoText = target.getLocationInfo(zipCode);
 
@@ -43,19 +43,19 @@ public class LocationSpec {
 
     @Test
     public void shouldCallTimeZoneServiceWithZip() {
-        when(temperatureServiceMock.get(zipCode)).thenReturn(new CityTemp("pdx", "72F"));
-        when(timeZoneServiceMock.get(zipCode)).thenReturn("Pacific");
+        when(temperatureServiceMock.get(zipCode)).thenReturn(new CityTemp("pdx", "72F", "45", "-122"));
+        when(timeZoneServiceMock.get("45", "-122")).thenReturn("Pacific");
 
         LocationInfo infoText = target.getLocationInfo(zipCode);
 
         assert(infoText != null);
         assert(!infoText.getTimeZone().isEmpty());
-        verify(timeZoneServiceMock, times(1)).get(anyString());
+        verify(timeZoneServiceMock, times(1)).get(anyString(), anyString());
     }
 
     @Test
     public void shouldCallElevationServiceWithZip() {
-        when(temperatureServiceMock.get(zipCode)).thenReturn(new CityTemp("pdx", "72F"));
+        when(temperatureServiceMock.get(zipCode)).thenReturn(new CityTemp("pdx", "72F", "45", "-122"));
         when(elevationServiceMock.get(zipCode)).thenReturn("200ft");
 
         LocationInfo infoText = target.getLocationInfo(zipCode);

@@ -6,7 +6,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.web.client.RestTemplate;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -33,7 +32,7 @@ public class TemperatureSpec {
     @Test
     public void shouldCallTemperatureAndParseServices() {
         when(restTemplate.getForObject(anyString(), any())).thenReturn(json);
-        when(parser.parse(anyString())).thenReturn(new CityTemp("pdx", "72F"));
+        when(parser.parse(anyString())).thenReturn(new CityTemp("pdx", "72F", "45", "-122"));
 
         CityTemp cityTemp = target.get(zipCode);
 
