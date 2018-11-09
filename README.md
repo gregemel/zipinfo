@@ -9,6 +9,7 @@
     * for Cayuse code challenge 
 
 ##sample usage:
+* enter proper api keys for Open Weather and Google in application.property
 * run service on port 8080 (default)
 * using browser:
     * http://localhost:8080/api/v1/zipinfo/97201
