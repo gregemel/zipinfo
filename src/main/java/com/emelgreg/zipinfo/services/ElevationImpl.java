@@ -23,7 +23,6 @@ public class ElevationImpl implements Elevation {
 
     String callEndpoint(String latitude, String longitude, String apiKey) {
 
-        //https://maps.googleapis.com/maps/api/elevation/json?locations=39.7391536,-104.9847034&key=AIzaSyDV0
         String uri = String.format("https://maps.googleapis.com/maps/api/elevation/json?locations=%s,%s&key=%s",
                 latitude, longitude, apiKey);
 
@@ -37,6 +36,3 @@ public class ElevationImpl implements Elevation {
         return Double.toString(elevation) + "ft";
     }
 }
-
-
-//https://maps.googleapis.com/maps/api/elevation/json?locations=39.7391536,-104.9847034&key=AIzaSyDV0QKbsTdAvxqJq5eQmiCkny-_vH_-yZg

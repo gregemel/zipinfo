@@ -1,9 +1,8 @@
 package com.emelgreg.zipinfo.services;
 
+import com.emelgreg.zipinfo.models.CityTemp;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import com.emelgreg.zipinfo.models.CityTemp;
 import org.springframework.stereotype.Service;
 
 import static java.lang.Math.round;

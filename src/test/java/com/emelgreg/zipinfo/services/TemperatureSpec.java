@@ -10,9 +10,7 @@ import org.springframework.web.client.RestTemplate;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TemperatureSpec {
@@ -30,15 +28,18 @@ public class TemperatureSpec {
     TemperatureImpl target;
 
     @Test
-    public void shouldCallTemperatureAndParseServices() {
+    public void shouldCallTemperatureEndpointAndParseResponse() {
         when(restTemplate.getForObject(anyString(), any())).thenReturn(json);
         when(parser.parse(anyString())).thenReturn(new CityTemp("pdx", "72F", "45", "-122"));
 
         CityTemp cityTemp = target.get(zipCode);
 
         assert(cityTemp != null);
+        assert(cityTemp.getCity().equals("pdx"));
+        assert(cityTemp.getTemperature().equals("72F"));
+        assert(cityTemp.getLatitude().equals("45"));
+        assert(cityTemp.getLongitude().equals("-122"));
         verify(restTemplate, times(1)).getForObject(anyString(), any());
         verify(parser, times(1)).parse(anyString());
     }
-
 }

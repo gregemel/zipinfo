@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TimeZoneSpec {
@@ -32,12 +32,13 @@ public class TimeZoneSpec {
     TimeZoneImpl target;
 
     @Test
-    public void shouldCallTimeZoneEndpoint() {
+    public void shouldCallTimeZoneEndpointAndParseResponse() {
         when(restTemplate.getForObject(anyString(), any())).thenReturn(json);
 
         String timeZone = target.get(latitude, longitude);
 
         assert(timeZone != null);
         assert(timeZone.equals("Pacific Daylight Time"));
+        verify(restTemplate, times(1)).getForObject(anyString(), any());
     }
 }

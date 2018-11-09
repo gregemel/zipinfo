@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ElevationSpec {
@@ -38,12 +38,13 @@ public class ElevationSpec {
     ElevationImpl target;
 
     @Test
-    public void shouldCallElevationEndpoint() {
+    public void shouldCallElevationEndpointAndParseResponse() {
         when(restTemplate.getForObject(anyString(), any())).thenReturn(json);
 
         String timeZone = target.get(latitude, longitude);
 
         assert(timeZone != null);
         assert(timeZone.equals("5278.0ft"));
+        verify(restTemplate, times(1)).getForObject(anyString(), any());
     }
 }

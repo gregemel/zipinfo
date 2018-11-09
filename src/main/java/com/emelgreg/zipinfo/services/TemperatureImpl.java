@@ -29,12 +29,3 @@ public class TemperatureImpl implements Temperature {
         return restTemplate.getForObject(uri, String.class);
     }
 }
-
-
-//ba89902eb83ba51bf619f24e6fcb8935
-//api.openweathermap.org/data/2.5/weather?zip=97201,us
-//api.openweathermap.org/data/2.5/weather?zip=97201,us&appid=ba89902eb83ba51bf619f24e6fcb8935
-
-
-
-
