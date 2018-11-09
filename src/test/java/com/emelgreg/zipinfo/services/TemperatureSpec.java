@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -41,5 +42,18 @@ public class TemperatureSpec {
         assert(cityTemp.getLongitude().equals("-122"));
         verify(restTemplate, times(1)).getForObject(anyString(), any());
         verify(parser, times(1)).parse(anyString());
+    }
+
+    @Test
+    public void shouldReturnUnavailableForErrors() {
+        when(restTemplate.getForObject(anyString(), any())).thenThrow(RestClientException.class);
+
+        CityTemp cityTemp = target.get(zipCode);
+
+        assert(cityTemp != null);
+        assert(cityTemp.getCity().equals("unknown"));
+        assert(cityTemp.getTemperature().equals("unavailable"));
+        assert(cityTemp.getLatitude().equals("unavailable"));
+        assert(cityTemp.getLongitude().equals("unavailable"));
     }
 }

@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -40,5 +41,15 @@ public class TimeZoneSpec {
         assert(timeZone != null);
         assert(timeZone.equals("Pacific Daylight Time"));
         verify(restTemplate, times(1)).getForObject(anyString(), any());
+    }
+
+    @Test
+    public void shouldReturnUnavailableForErrors() {
+        when(restTemplate.getForObject(anyString(), any())).thenThrow(RestClientException.class);
+
+        String timeZone = target.get(latitude, longitude);
+
+        assert(timeZone != null);
+        assert(timeZone.equals("unavailable"));
     }
 }
