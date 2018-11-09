@@ -2,8 +2,10 @@ package com.emelgreg.zipinfo.services;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
 
 @Service
 public class TimeZoneImpl implements TimeZone {
@@ -11,10 +13,17 @@ public class TimeZoneImpl implements TimeZone {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Value("${GoogleKey}")
+    private String apiKey;
+
     @Override
     public String get(String latitude, String longitude) {
-        String apiKey = "AIzaSyDV0QKbsTdAvxqJq5eQmiCkny-_vH_-yZg";
-        return callEndpoint(latitude, longitude, apiKey);
+        try {
+            return callEndpoint(latitude, longitude, apiKey);
+        } catch (Exception ex) {
+            System.out.println("Failed to call TimeZone endpoint: " + ex.getMessage());
+            return "unavailable";
+        }
     }
 
     private String callEndpoint(String latitude, String longitude, String apiKey) {

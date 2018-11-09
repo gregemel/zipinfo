@@ -2,6 +2,7 @@ package com.emelgreg.zipinfo.services;
 
 import com.emelgreg.zipinfo.models.CityTemp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -14,16 +15,22 @@ public class TemperatureImpl implements Temperature {
     @Autowired
     private OpenWeatherParser parser;
 
+    @Value("${OpenWeatherKey}")
+    private String apiKey;
+
     @Override
     public CityTemp get(String zip) {
 
-        String results = callEndpoint(zip, "ba89902eb83ba51bf619f24e6fcb8935");
-
-        return parser.parse(results);
+        try {
+            String results = callEndpoint(zip, apiKey);
+            return parser.parse(results);
+        } catch (Exception ex) {
+            System.out.println("Failed to call OpenWeather endpoint: " + ex.getMessage());
+            return new CityTemp("unknown", "unavailable", "unavailable", "unavailable");
+        }
     }
 
-    String callEndpoint(String zipCode, String apiKey) {
-        //"http://api.openweathermap.org/data/2.5/weather?zip=97201,us&appid=ba89902eb83ba51bf619f24e6fcb8935";
+    private String callEndpoint(String zipCode, String apiKey) {
         String uri = String.format("http://api.openweathermap.org/data/2.5/weather?zip=%s,us&appid=%s", zipCode, apiKey);
 
         return restTemplate.getForObject(uri, String.class);
