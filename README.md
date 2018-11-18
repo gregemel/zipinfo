@@ -9,6 +9,9 @@
     
     * java spring boot -- http endpoints
     * http controller and clients with unit tests
+    
+    <img src="./ZipInfo%20Hexagonal%20Architecture.svg">
+    
 
 ## sample usage:
 * configure api-keys for Open Weather and Google
