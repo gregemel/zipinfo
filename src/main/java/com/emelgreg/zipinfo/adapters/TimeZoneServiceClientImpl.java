@@ -1,16 +1,14 @@
-package com.emelgreg.zipinfo.services;
+package com.emelgreg.zipinfo.adapters;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import static java.lang.Math.round;
 
 @Service
-public class ElevationImpl implements Elevation {
+public class TimeZoneServiceClientImpl implements TimeZoneServiceClient {
 
     @Autowired
     private RestTemplate restTemplate;
@@ -23,21 +21,20 @@ public class ElevationImpl implements Elevation {
         try {
             return callEndpoint(latitude, longitude, apiKey);
         } catch (Exception ex) {
-            System.out.println("Failed to call Elevation endpoint: " + ex.getMessage());
+            System.out.println("Failed to call TimeZoneServiceClient endpoint: " + ex.getMessage());
             return "unavailable";
         }
     }
 
     private String callEndpoint(String latitude, String longitude, String apiKey) {
+        long timeStamp = System.currentTimeMillis() / 1000;
 
-        String uri = String.format("https://maps.googleapis.com/maps/api/elevation/json?locations=%s,%s&key=%s",
-                latitude, longitude, apiKey);
+        String uri = String.format("https://maps.googleapis.com/maps/api/timezone/json?location=%s,%s&timestamp=%s&key=%s",
+                latitude, longitude, timeStamp, apiKey);
 
         String json = restTemplate.getForObject(uri, String.class);
 
         JSONObject obj = new JSONObject(json);
-        JSONArray arr = obj.getJSONArray("results");
-        double elevation = round(arr.getJSONObject(0).getDouble("elevation") * 3.281);
-        return Double.toString(elevation) + "ft";
+        return obj.getString("timeZoneName");
     }
 }

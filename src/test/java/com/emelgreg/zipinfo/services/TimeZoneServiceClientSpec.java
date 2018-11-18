@@ -1,5 +1,6 @@
 package com.emelgreg.zipinfo.services;
 
+import com.emelgreg.zipinfo.adapters.TimeZoneServiceClientImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -13,7 +14,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class TimeZoneSpec {
+public class TimeZoneServiceClientSpec {
 
     private String latitude = "45.52";
     private String longitude = "-122.67";
@@ -30,7 +31,7 @@ public class TimeZoneSpec {
     RestTemplate restTemplate;
 
     @InjectMocks
-    TimeZoneImpl target;
+    TimeZoneServiceClientImpl target;
 
     @Test
     public void shouldCallTimeZoneEndpointAndParseResponse() {

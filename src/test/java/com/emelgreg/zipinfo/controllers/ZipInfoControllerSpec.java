@@ -1,7 +1,7 @@
 package com.emelgreg.zipinfo.controllers;
 
-import com.emelgreg.zipinfo.models.LocationInfo;
-import com.emelgreg.zipinfo.services.Location;
+import com.emelgreg.zipinfo.models.Weather;
+import com.emelgreg.zipinfo.handlers.ZipWeatherHandler;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +20,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(ZipInfo.class)
-public class ZipInfoSpec {
+@WebMvcTest(ZipInfoController.class)
+public class ZipInfoControllerSpec {
 
     private String zipCode = "98765";
 
@@ -29,36 +29,36 @@ public class ZipInfoSpec {
     private MockMvc mockMvc;
 
     @MockBean
-    private Location locationServiceMock;
+    private ZipWeatherHandler zipWeatherHandlerServiceMock;
 
     @Test
     public void shouldGetZipInformationFromLocationService() throws Exception {
-        when(locationServiceMock.getLocationInfo(zipCode)).thenReturn(
-                new LocationInfo("city", "temp", "timezone", "elevation"));
+        when(zipWeatherHandlerServiceMock.handleWeatherRequest(zipCode)).thenReturn(
+                new Weather("city", "temp", "timezone", "elevation"));
 
         this.mockMvc.perform(get("/api/v1/zipinfo/" + zipCode)).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString(
                         "At the location city, the temperature is temp, the timezone is timezone, and the elevation is elevation.")));
 
-        verify(locationServiceMock, times(1)).getLocationInfo(anyString());
+        verify(zipWeatherHandlerServiceMock, times(1)).handleWeatherRequest(anyString());
     }
 
     @Test
     public void shouldReturnErrorMessageWhenZipCodeIsLessThan5Digits() throws Exception {
-        when(locationServiceMock.getLocationInfo(zipCode)).thenReturn(
-                new LocationInfo("city", "temp", "timezone", "elevation"));
+        when(zipWeatherHandlerServiceMock.handleWeatherRequest(zipCode)).thenReturn(
+                new Weather("city", "temp", "timezone", "elevation"));
 
         this.mockMvc.perform(get("/api/v1/zipinfo/1234")).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString(
                         "This service requires a valid zip code.")));
 
-        verify(locationServiceMock, times(0)).getLocationInfo(anyString());
+        verify(zipWeatherHandlerServiceMock, times(0)).handleWeatherRequest(anyString());
     }
 
     @Test
     public void shouldReturn404WhenZipCodeIsNotProvided() throws Exception {
-        when(locationServiceMock.getLocationInfo(zipCode)).thenReturn(
-                new LocationInfo("city", "temp", "timezone", "elevation"));
+        when(zipWeatherHandlerServiceMock.handleWeatherRequest(zipCode)).thenReturn(
+                new Weather("city", "temp", "timezone", "elevation"));
 
         this.mockMvc.perform(get("/api/v1/zipinfo/")).andDo(print()).andExpect(status().isNotFound());
     }

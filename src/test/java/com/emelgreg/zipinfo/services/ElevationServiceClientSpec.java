@@ -1,5 +1,6 @@
 package com.emelgreg.zipinfo.services;
 
+import com.emelgreg.zipinfo.adapters.ElevationServiceClientImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -13,7 +14,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ElevationSpec {
+public class ElevationServiceClientSpec {
 
     private String latitude = "45.52";
     private String longitude = "-122.67";
@@ -36,7 +37,7 @@ public class ElevationSpec {
     RestTemplate restTemplate;
 
     @InjectMocks
-    ElevationImpl target;
+    ElevationServiceClientImpl target;
 
     @Test
     public void shouldCallElevationEndpointAndParseResponse() {
