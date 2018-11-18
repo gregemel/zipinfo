@@ -1,7 +1,7 @@
 # Zip Info Service - Java Spring Boot -- http endpoints
 
 * provides temperature, time zone, and elevation data for given us zip code
-* demonstrates hexagonal http endpoint with core, models, ports, and adapters namespaces
+* demonstrates hexagonal, http spring boot, endpoint with core, models, ports, and adapters namespaces
 
 * uses:
     * Open WeatherMap
