@@ -1,6 +1,6 @@
 package com.emelgreg.zipinfo.adapters;
 
-import com.emelgreg.zipinfo.ports.WeatherServiceClient;
+import com.emelgreg.zipinfo.ports.WeatherService;
 import com.emelgreg.zipinfo.models.Location;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class WeatherServiceClientImpl implements WeatherServiceClient {
+public class WeatherServiceClientImpl implements WeatherService {
 
     @Autowired
     private RestTemplate restTemplate;

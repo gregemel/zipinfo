@@ -1,9 +1,8 @@
-package com.emelgreg.zipinfo.handler;
+package com.emelgreg.zipinfo.handlers;
 
-import com.emelgreg.zipinfo.ports.ElevationServiceClient;
-import com.emelgreg.zipinfo.ports.WeatherServiceClient;
-import com.emelgreg.zipinfo.ports.TimeZoneServiceClient;
-import com.emelgreg.zipinfo.handlers.ZipWeatherHandlerImpl;
+import com.emelgreg.zipinfo.ports.ElevationService;
+import com.emelgreg.zipinfo.ports.WeatherService;
+import com.emelgreg.zipinfo.ports.TimeZoneService;
 import com.emelgreg.zipinfo.models.Location;
 import com.emelgreg.zipinfo.models.Weather;
 import org.junit.Test;
@@ -20,13 +19,13 @@ public class ZipWeatherHandlerSpec {
     private String zipCode = "98765";
 
     @Mock
-    WeatherServiceClient weatherServiceClientServiceMock;
+    WeatherService weatherServiceClientServiceMock;
 
     @Mock
-    TimeZoneServiceClient timeZoneServiceClientServiceMock;
+    TimeZoneService timeZoneServiceClientServiceMock;
 
     @Mock
-    ElevationServiceClient elevationServiceClientServiceMock;
+    ElevationService elevationServiceClientServiceMock;
 
     @InjectMocks
     ZipWeatherHandlerImpl target;

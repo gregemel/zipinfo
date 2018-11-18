@@ -1,6 +1,5 @@
-package com.emelgreg.zipinfo.adapter;
+package com.emelgreg.zipinfo.adapters;
 
-import com.emelgreg.zipinfo.adapters.ElevationServiceClientImpl;
 import com.emelgreg.zipinfo.models.Location;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +14,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ElevationServiceClientSpec {
+public class ElevationServiceSpec {
 
     private String latitude = "45.52";
     private String longitude = "-122.67";

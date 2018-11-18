@@ -2,6 +2,6 @@ package com.emelgreg.zipinfo.ports;
 
 import com.emelgreg.zipinfo.models.Location;
 
-public interface TimeZoneServiceClient {
-    String get(Location location);
+public interface WeatherService {
+    Location get(String zip);
 }

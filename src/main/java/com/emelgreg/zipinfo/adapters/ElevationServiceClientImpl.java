@@ -1,7 +1,7 @@
 package com.emelgreg.zipinfo.adapters;
 
 import com.emelgreg.zipinfo.models.Location;
-import com.emelgreg.zipinfo.ports.ElevationServiceClient;
+import com.emelgreg.zipinfo.ports.ElevationService;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 import static java.lang.Math.round;
 
 @Service
-public class ElevationServiceClientImpl implements ElevationServiceClient {
+public class ElevationServiceClientImpl implements ElevationService {
 
     @Autowired
     private RestTemplate restTemplate;
@@ -25,7 +25,7 @@ public class ElevationServiceClientImpl implements ElevationServiceClient {
         try {
             return callEndpoint(location.getLatitude(), location.getLongitude(), apiKey);
         } catch (Exception ex) {
-            System.out.println("Failed to call ElevationServiceClient endpoint: " + ex.getMessage());
+            System.out.println("Failed to call ElevationService endpoint: " + ex.getMessage());
             return "unavailable";
         }
     }
