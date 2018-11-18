@@ -30,4 +30,5 @@
 * functional/integration tests/mocking uri/swagger
 * caching
 * logging/monitoring/health
+* build/deploy pipeline
 * gui
