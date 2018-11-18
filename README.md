@@ -1,6 +1,6 @@
 # Zip Info Service
 
-* provides temperature, time zone, and elevation, given us zip code
+* provides temperature, time zone, and elevation data for given us zip code
 
 * uses:
     * Open WeatherMap
