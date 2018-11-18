@@ -1,6 +1,6 @@
-package com.emelgreg.zipinfo.services;
+package com.emelgreg.zipinfo.adapter;
 
-import com.emelgreg.zipinfo.handlers.OpenWeatherResponseHandlerImpl;
+import com.emelgreg.zipinfo.adapters.OpenWeatherResponseParserImpl;
 import com.emelgreg.zipinfo.models.Location;
 import org.json.JSONException;
 import org.junit.Test;
@@ -8,9 +8,9 @@ import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class OpenWeatherResponseHandlerSpec {
+public class OpenWeatherResponseParserSpec {
 
-    private OpenWeatherResponseHandlerImpl target = new OpenWeatherResponseHandlerImpl();
+    private OpenWeatherResponseParserImpl target = new OpenWeatherResponseParserImpl();
 
     @Test
     public void shouldParseJsonResults() throws JSONException {

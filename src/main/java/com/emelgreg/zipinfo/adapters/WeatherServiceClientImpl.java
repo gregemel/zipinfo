@@ -1,20 +1,19 @@
 package com.emelgreg.zipinfo.adapters;
 
 import com.emelgreg.zipinfo.models.Location;
-import com.emelgreg.zipinfo.handlers.OpenWeatherResponseHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class TemperatureServiceClientImpl implements TemperatureServiceClient {
+public class WeatherServiceClientImpl implements WeatherServiceClient {
 
     @Autowired
     private RestTemplate restTemplate;
 
     @Autowired
-    private OpenWeatherResponseHandler parser;
+    private OpenWeatherResponseParser parser;
 
     @Value("${OpenWeatherKey}")
     private String apiKey;

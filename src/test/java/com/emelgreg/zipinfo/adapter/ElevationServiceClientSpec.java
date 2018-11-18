@@ -1,4 +1,4 @@
-package com.emelgreg.zipinfo.services;
+package com.emelgreg.zipinfo.adapter;
 
 import com.emelgreg.zipinfo.adapters.ElevationServiceClientImpl;
 import org.junit.Test;

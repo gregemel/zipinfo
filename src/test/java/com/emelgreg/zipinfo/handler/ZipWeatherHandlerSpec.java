@@ -1,7 +1,7 @@
-package com.emelgreg.zipinfo.services;
+package com.emelgreg.zipinfo.handler;
 
 import com.emelgreg.zipinfo.adapters.ElevationServiceClient;
-import com.emelgreg.zipinfo.adapters.TemperatureServiceClient;
+import com.emelgreg.zipinfo.adapters.WeatherServiceClient;
 import com.emelgreg.zipinfo.adapters.TimeZoneServiceClient;
 import com.emelgreg.zipinfo.handlers.ZipWeatherHandlerImpl;
 import com.emelgreg.zipinfo.models.Location;
@@ -20,7 +20,7 @@ public class ZipWeatherHandlerSpec {
     private String zipCode = "98765";
 
     @Mock
-    TemperatureServiceClient temperatureServiceClientServiceMock;
+    WeatherServiceClient weatherServiceClientServiceMock;
 
     @Mock
     TimeZoneServiceClient timeZoneServiceClientServiceMock;
@@ -33,19 +33,19 @@ public class ZipWeatherHandlerSpec {
 
     @Test
     public void shouldCallTemperatureServiceWithZip() {
-        when(temperatureServiceClientServiceMock.get(zipCode)).thenReturn(new Location("pdx", "72F", "45", "-122"));
+        when(weatherServiceClientServiceMock.get(zipCode)).thenReturn(new Location("pdx", "72F", "45", "-122"));
 
         Weather infoText = target.handleWeatherRequest(zipCode);
 
         assert(infoText != null);
         assert(!infoText.getCity().isEmpty());
         assert(!infoText.getTemperature().isEmpty());
-        verify(temperatureServiceClientServiceMock, times(1)).get(anyString());
+        verify(weatherServiceClientServiceMock, times(1)).get(anyString());
     }
 
     @Test
     public void shouldCallTimeZoneServiceWithZip() {
-        when(temperatureServiceClientServiceMock.get(zipCode)).thenReturn(new Location("pdx", "72F", "45", "-122"));
+        when(weatherServiceClientServiceMock.get(zipCode)).thenReturn(new Location("pdx", "72F", "45", "-122"));
         when(timeZoneServiceClientServiceMock.get("45", "-122")).thenReturn("Pacific");
 
         Weather infoText = target.handleWeatherRequest(zipCode);
@@ -57,7 +57,7 @@ public class ZipWeatherHandlerSpec {
 
     @Test
     public void shouldCallElevationServiceWithZip() {
-        when(temperatureServiceClientServiceMock.get(zipCode)).thenReturn(new Location("pdx", "72F", "45", "-122"));
+        when(weatherServiceClientServiceMock.get(zipCode)).thenReturn(new Location("pdx", "72F", "45", "-122"));
         when(elevationServiceClientServiceMock.get("45", "-122")).thenReturn("200ft");
 
         Weather infoText = target.handleWeatherRequest(zipCode);

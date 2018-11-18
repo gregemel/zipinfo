@@ -3,7 +3,7 @@ package com.emelgreg.zipinfo.handlers;
 import com.emelgreg.zipinfo.models.Location;
 import com.emelgreg.zipinfo.models.Weather;
 import com.emelgreg.zipinfo.adapters.ElevationServiceClient;
-import com.emelgreg.zipinfo.adapters.TemperatureServiceClient;
+import com.emelgreg.zipinfo.adapters.WeatherServiceClient;
 import com.emelgreg.zipinfo.adapters.TimeZoneServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ZipWeatherHandlerImpl implements ZipWeatherHandler {
     @Autowired
-    private TemperatureServiceClient temperatureService;
+    private WeatherServiceClient temperatureService;
 
     @Autowired
     private TimeZoneServiceClient timeZoneService;

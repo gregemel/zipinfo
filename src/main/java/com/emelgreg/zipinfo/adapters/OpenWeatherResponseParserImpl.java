@@ -1,4 +1,4 @@
-package com.emelgreg.zipinfo.handlers;
+package com.emelgreg.zipinfo.adapters;
 
 import com.emelgreg.zipinfo.models.Location;
 import org.json.JSONException;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import static java.lang.Math.round;
 
 @Service
-public class OpenWeatherResponseHandlerImpl implements OpenWeatherResponseHandler {
+public class OpenWeatherResponseParserImpl implements OpenWeatherResponseParser {
 
     public Location parse(String json) throws JSONException {
 

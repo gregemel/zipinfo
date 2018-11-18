@@ -1,4 +1,4 @@
-package com.emelgreg.zipinfo.services;
+package com.emelgreg.zipinfo.adapter;
 
 import com.emelgreg.zipinfo.adapters.TimeZoneServiceClientImpl;
 import org.junit.Test;
