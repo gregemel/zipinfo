@@ -1,6 +1,7 @@
-package com.emelgreg.zipinfo.adapters;
+package com.emelgreg.zipinfo.services;
 
 import com.emelgreg.zipinfo.models.Location;
+import com.emelgreg.zipinfo.services.OpenWeatherResponseParserImpl;
 import org.json.JSONException;
 import org.junit.Test;
 import org.junit.runner.RunWith;

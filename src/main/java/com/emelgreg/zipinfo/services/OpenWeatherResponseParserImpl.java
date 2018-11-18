@@ -1,4 +1,4 @@
-package com.emelgreg.zipinfo.adapters;
+package com.emelgreg.zipinfo.services;
 
 import com.emelgreg.zipinfo.models.Location;
 import org.json.JSONException;

@@ -2,6 +2,7 @@ package com.emelgreg.zipinfo.adapters;
 
 import com.emelgreg.zipinfo.ports.WeatherService;
 import com.emelgreg.zipinfo.models.Location;
+import com.emelgreg.zipinfo.services.OpenWeatherResponseParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

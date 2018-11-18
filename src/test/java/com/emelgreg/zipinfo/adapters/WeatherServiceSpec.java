@@ -1,6 +1,7 @@
 package com.emelgreg.zipinfo.adapters;
 
 import com.emelgreg.zipinfo.models.Location;
+import com.emelgreg.zipinfo.services.OpenWeatherResponseParser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

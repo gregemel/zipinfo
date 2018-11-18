@@ -25,7 +25,9 @@ public class ZipWeatherHandlerImpl implements ZipWeatherHandler {
 
         Location location = temperatureService.get(zip);
 
-        return new Weather(location.getCity(), location.getTemperature(),
+        return new Weather(
+                location.getCity(),
+                location.getTemperature(),
                 timeZoneService.get(location),
                 elevationService.get(location));
     }
