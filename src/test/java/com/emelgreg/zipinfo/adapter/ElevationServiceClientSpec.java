@@ -1,6 +1,7 @@
 package com.emelgreg.zipinfo.adapter;
 
 import com.emelgreg.zipinfo.adapters.ElevationServiceClientImpl;
+import com.emelgreg.zipinfo.models.Location;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -18,6 +19,7 @@ public class ElevationServiceClientSpec {
 
     private String latitude = "45.52";
     private String longitude = "-122.67";
+    private Location location = new Location("", "", latitude, longitude);
 
     String json = "{\n" +
             "   \"results\" : [\n" +
@@ -43,7 +45,7 @@ public class ElevationServiceClientSpec {
     public void shouldCallElevationEndpointAndParseResponse() {
         when(restTemplate.getForObject(anyString(), any())).thenReturn(json);
 
-        String timeZone = target.get(latitude, longitude);
+        String timeZone = target.get(location);
 
         assert(timeZone != null);
         assert(timeZone.equals("5278.0ft"));
@@ -54,7 +56,7 @@ public class ElevationServiceClientSpec {
     public void shouldReturnUnavailableForErrors() {
         when(restTemplate.getForObject(anyString(), any())).thenThrow(RestClientException.class);
 
-        String timeZone = target.get(latitude, longitude);
+        String timeZone = target.get(location);
 
         assert(timeZone != null);
         assert(timeZone.equals("unavailable"));

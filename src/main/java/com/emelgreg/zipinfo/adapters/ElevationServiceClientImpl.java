@@ -1,5 +1,7 @@
 package com.emelgreg.zipinfo.adapters;
 
+import com.emelgreg.zipinfo.models.Location;
+import com.emelgreg.zipinfo.ports.ElevationServiceClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +21,9 @@ public class ElevationServiceClientImpl implements ElevationServiceClient {
     private String apiKey;
 
     @Override
-    public String get(String latitude, String longitude) {
+    public String get(Location location) {
         try {
-            return callEndpoint(latitude, longitude, apiKey);
+            return callEndpoint(location.getLatitude(), location.getLongitude(), apiKey);
         } catch (Exception ex) {
             System.out.println("Failed to call ElevationServiceClient endpoint: " + ex.getMessage());
             return "unavailable";

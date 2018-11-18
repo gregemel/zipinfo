@@ -1,8 +1,8 @@
 package com.emelgreg.zipinfo.handler;
 
-import com.emelgreg.zipinfo.adapters.ElevationServiceClient;
-import com.emelgreg.zipinfo.adapters.WeatherServiceClient;
-import com.emelgreg.zipinfo.adapters.TimeZoneServiceClient;
+import com.emelgreg.zipinfo.ports.ElevationServiceClient;
+import com.emelgreg.zipinfo.ports.WeatherServiceClient;
+import com.emelgreg.zipinfo.ports.TimeZoneServiceClient;
 import com.emelgreg.zipinfo.handlers.ZipWeatherHandlerImpl;
 import com.emelgreg.zipinfo.models.Location;
 import com.emelgreg.zipinfo.models.Weather;
@@ -46,24 +46,24 @@ public class ZipWeatherHandlerSpec {
     @Test
     public void shouldCallTimeZoneServiceWithZip() {
         when(weatherServiceClientServiceMock.get(zipCode)).thenReturn(new Location("pdx", "72F", "45", "-122"));
-        when(timeZoneServiceClientServiceMock.get("45", "-122")).thenReturn("Pacific");
+        when(timeZoneServiceClientServiceMock.get(any(Location.class))).thenReturn("Pacific");
 
         Weather infoText = target.handleWeatherRequest(zipCode);
 
         assert(infoText != null);
         assert(!infoText.getTimeZone().isEmpty());
-        verify(timeZoneServiceClientServiceMock, times(1)).get(anyString(), anyString());
+        verify(timeZoneServiceClientServiceMock, times(1)).get(any(Location.class));
     }
 
     @Test
     public void shouldCallElevationServiceWithZip() {
         when(weatherServiceClientServiceMock.get(zipCode)).thenReturn(new Location("pdx", "72F", "45", "-122"));
-        when(elevationServiceClientServiceMock.get("45", "-122")).thenReturn("200ft");
+        when(elevationServiceClientServiceMock.get(any(Location.class))).thenReturn("200ft");
 
         Weather infoText = target.handleWeatherRequest(zipCode);
 
         assert(infoText != null);
         assert(!infoText.getElevation().isEmpty());
-        verify(elevationServiceClientServiceMock, times(1)).get(anyString(), anyString());
+        verify(elevationServiceClientServiceMock, times(1)).get(any(Location.class));
     }
 }

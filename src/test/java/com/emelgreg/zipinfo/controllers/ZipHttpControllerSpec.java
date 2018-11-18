@@ -1,7 +1,7 @@
 package com.emelgreg.zipinfo.controllers;
 
 import com.emelgreg.zipinfo.models.Weather;
-import com.emelgreg.zipinfo.handlers.ZipWeatherHandler;
+import com.emelgreg.zipinfo.ports.ZipWeatherHandler;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +20,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(ZipInfoController.class)
-public class ZipInfoControllerSpec {
+@WebMvcTest(ZipHttpController.class)
+public class ZipHttpControllerSpec {
 
     private String zipCode = "98765";
 

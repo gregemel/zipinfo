@@ -1,5 +1,6 @@
 package com.emelgreg.zipinfo.adapters;
 
+import com.emelgreg.zipinfo.ports.WeatherServiceClient;
 import com.emelgreg.zipinfo.models.Location;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
