@@ -11,8 +11,9 @@
     * http controller and clients with unit tests
 
 ## sample usage:
-* enter proper api keys for Open Weather and Google in application.properties
-* run service on port 8080 (default)
+* configure api-keys for Open Weather and Google
+   * application.properties
+* run service (default: port 8080)
 * using browser:
     * http://localhost:8080/api/v1/zipinfo/97201
     * http://localhost:8080/api/v1/zipinfo/10101
