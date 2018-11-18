@@ -22,6 +22,6 @@
         
 ## what's missing?
 * security
-* functional/integration tests/mocking uri
+* functional/integration tests/mocking uri/swagger
 * caching
 * gui
