@@ -1,4 +1,4 @@
-package com.emelgreg.zipinfo.handlers;
+package com.emelgreg.zipinfo.core;
 
 import com.emelgreg.zipinfo.ports.ElevationService;
 import com.emelgreg.zipinfo.ports.WeatherService;
