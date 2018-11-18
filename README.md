@@ -1,4 +1,4 @@
-# Zip Info Service
+# Zip Info Service - Java Spring Boot -- http endpoint -- sample code
 
 * provides temperature, time zone, and elevation data for given us zip code
 
