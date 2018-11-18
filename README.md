@@ -1,6 +1,7 @@
 # Zip Info Service
-* provide US zip code
-* get back temperature, time zone, and elevation
+
+* provides temperature, time zone, and elevation, given us zip code
+
 * uses:
     * Open WeatherMap
     * Google Time Zone
