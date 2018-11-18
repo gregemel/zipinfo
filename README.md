@@ -25,4 +25,5 @@
 * security
 * functional/integration tests/mocking uri/swagger
 * caching
+* logging/monitoring/health
 * gui
