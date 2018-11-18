@@ -1,32 +1,34 @@
-package com.emelgreg.zipinfo.services;
+package com.emelgreg.zipinfo.adapters;
 
-import com.emelgreg.zipinfo.models.CityTemp;
+import com.emelgreg.zipinfo.ports.WeatherService;
+import com.emelgreg.zipinfo.models.Location;
+import com.emelgreg.zipinfo.services.OpenWeatherResponseParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class TemperatureImpl implements Temperature {
+public class WeatherServiceClientImpl implements WeatherService {
 
     @Autowired
     private RestTemplate restTemplate;
 
     @Autowired
-    private OpenWeatherParser parser;
+    private OpenWeatherResponseParser parser;
 
     @Value("${OpenWeatherKey}")
     private String apiKey;
 
     @Override
-    public CityTemp get(String zip) {
+    public Location get(String zip) {
 
         try {
             String results = callEndpoint(zip, apiKey);
             return parser.parse(results);
         } catch (Exception ex) {
             System.out.println("Failed to call OpenWeather endpoint: " + ex.getMessage());
-            return new CityTemp("unknown", "unavailable", "unavailable", "unavailable");
+            return new Location("unknown", "unavailable", "unavailable", "unavailable");
         }
     }
 

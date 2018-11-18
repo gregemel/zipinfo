@@ -1,5 +1,7 @@
-package com.emelgreg.zipinfo.services;
+package com.emelgreg.zipinfo.adapters;
 
+import com.emelgreg.zipinfo.models.Location;
+import com.emelgreg.zipinfo.ports.TimeZoneService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,7 +10,7 @@ import org.springframework.web.client.RestTemplate;
 
 
 @Service
-public class TimeZoneImpl implements TimeZone {
+public class TimeZoneServiceClientImpl implements TimeZoneService {
 
     @Autowired
     private RestTemplate restTemplate;
@@ -17,11 +19,11 @@ public class TimeZoneImpl implements TimeZone {
     private String apiKey;
 
     @Override
-    public String get(String latitude, String longitude) {
+    public String get(Location location) {
         try {
-            return callEndpoint(latitude, longitude, apiKey);
+            return callEndpoint(location.getLatitude(), location.getLongitude(), apiKey);
         } catch (Exception ex) {
-            System.out.println("Failed to call TimeZone endpoint: " + ex.getMessage());
+            System.out.println("Failed to call TimeZoneService endpoint: " + ex.getMessage());
             return "unavailable";
         }
     }
