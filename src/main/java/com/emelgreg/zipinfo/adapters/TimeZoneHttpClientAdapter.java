@@ -1,7 +1,7 @@
 package com.emelgreg.zipinfo.adapters;
 
-import com.emelgreg.zipinfo.models.Location;
-import com.emelgreg.zipinfo.ports.TimeZoneService;
+import com.emelgreg.zipinfo.models.LocationConditions;
+import com.emelgreg.zipinfo.ports.TimeZonePort;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,20 +10,25 @@ import org.springframework.web.client.RestTemplate;
 
 
 @Service
-public class TimeZoneServiceClientImpl implements TimeZoneService {
+public class TimeZoneHttpClientAdapter implements TimeZonePort {
 
     @Autowired
+    public TimeZoneHttpClientAdapter(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
+
     private RestTemplate restTemplate;
 
     @Value("${GoogleKey}")
     private String apiKey;
 
     @Override
-    public String get(Location location) {
+    public String get(LocationConditions locationConditions) {
         try {
-            return callEndpoint(location.getLatitude(), location.getLongitude(), apiKey);
+            //todo: add time-based cache that is sensitive to daylight savings changes
+            return callEndpoint(locationConditions.getLatitude(), locationConditions.getLongitude(), apiKey);
         } catch (Exception ex) {
-            System.out.println("Failed to call TimeZoneService endpoint: " + ex.getMessage());
+            System.out.println("Failed to call TimeZonePort endpoint: " + ex.getMessage());
             return "unavailable";
         }
     }
@@ -31,6 +36,7 @@ public class TimeZoneServiceClientImpl implements TimeZoneService {
     private String callEndpoint(String latitude, String longitude, String apiKey) {
         long timeStamp = System.currentTimeMillis() / 1000;
 
+        //todo: use uri builder, pull url from application.properties, etc.
         String uri = String.format("https://maps.googleapis.com/maps/api/timezone/json?location=%s,%s&timestamp=%s&key=%s",
                 latitude, longitude, timeStamp, apiKey);
 

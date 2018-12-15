@@ -1,6 +1,6 @@
 package com.emelgreg.zipinfo.adapters;
 
-import com.emelgreg.zipinfo.models.Location;
+import com.emelgreg.zipinfo.models.LocationConditions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -18,7 +18,7 @@ public class TimeZoneServiceSpec {
 
     private String latitude = "45.52";
     private String longitude = "-122.67";
-    Location location = new Location("", "", latitude, longitude);
+    LocationConditions locationConditions = new LocationConditions("", "", latitude, longitude);
 
     String json = "{\n" +
             "   \"dstOffset\" : 3600,\n" +
@@ -32,13 +32,13 @@ public class TimeZoneServiceSpec {
     RestTemplate restTemplate;
 
     @InjectMocks
-    TimeZoneServiceClientImpl target;
+    TimeZoneHttpClientAdapter target;
 
     @Test
     public void shouldCallTimeZoneEndpointAndParseResponse() {
         when(restTemplate.getForObject(anyString(), any())).thenReturn(json);
 
-        String timeZone = target.get(location);
+        String timeZone = target.get(locationConditions);
 
         assert(timeZone != null);
         assert(timeZone.equals("Pacific Daylight Time"));
@@ -49,7 +49,7 @@ public class TimeZoneServiceSpec {
     public void shouldReturnUnavailableForErrors() {
         when(restTemplate.getForObject(anyString(), any())).thenThrow(RestClientException.class);
 
-        String timeZone = target.get(location);
+        String timeZone = target.get(locationConditions);
 
         assert(timeZone != null);
         assert(timeZone.equals("unavailable"));

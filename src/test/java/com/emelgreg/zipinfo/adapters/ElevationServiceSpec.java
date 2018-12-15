@@ -1,6 +1,6 @@
 package com.emelgreg.zipinfo.adapters;
 
-import com.emelgreg.zipinfo.models.Location;
+import com.emelgreg.zipinfo.models.LocationConditions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -18,13 +18,13 @@ public class ElevationServiceSpec {
 
     private String latitude = "45.52";
     private String longitude = "-122.67";
-    private Location location = new Location("", "", latitude, longitude);
+    private LocationConditions locationConditions = new LocationConditions("", "", latitude, longitude);
 
     String json = "{\n" +
             "   \"results\" : [\n" +
             "      {\n" +
             "         \"elevation\" : 1608.637939453125,\n" +
-            "         \"location\" : {\n" +
+            "         \"locationConditions\" : {\n" +
             "            \"lat\" : 39.7391536,\n" +
             "            \"lng\" : -104.9847034\n" +
             "         },\n" +
@@ -38,13 +38,13 @@ public class ElevationServiceSpec {
     RestTemplate restTemplate;
 
     @InjectMocks
-    ElevationServiceClientImpl target;
+    ElevationHttpClientAdapter target;
 
     @Test
     public void shouldCallElevationEndpointAndParseResponse() {
         when(restTemplate.getForObject(anyString(), any())).thenReturn(json);
 
-        String timeZone = target.get(location);
+        String timeZone = target.get(locationConditions);
 
         assert(timeZone != null);
         assert(timeZone.equals("5278.0ft"));
@@ -55,7 +55,7 @@ public class ElevationServiceSpec {
     public void shouldReturnUnavailableForErrors() {
         when(restTemplate.getForObject(anyString(), any())).thenThrow(RestClientException.class);
 
-        String timeZone = target.get(location);
+        String timeZone = target.get(locationConditions);
 
         assert(timeZone != null);
         assert(timeZone.equals("unavailable"));
