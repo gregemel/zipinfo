@@ -1,6 +1,6 @@
 package com.emelgreg.zipinfo.adapters;
 
-import com.emelgreg.zipinfo.models.Location;
+import com.emelgreg.zipinfo.models.LocationConditions;
 import com.emelgreg.zipinfo.services.OpenWeatherResponseParser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,20 +27,20 @@ public class WeatherServiceSpec {
     OpenWeatherResponseParser parser;
 
     @InjectMocks
-    WeatherServiceClientImpl target;
+    WeatherHttpClientAdapter target;
 
     @Test
     public void shouldCallTemperatureEndpointAndParseResponse() {
         when(restTemplate.getForObject(anyString(), any())).thenReturn(json);
-        when(parser.parse(anyString())).thenReturn(new Location("pdx", "72F", "45", "-122"));
+        when(parser.parse(anyString())).thenReturn(new LocationConditions("pdx", "72F", "45", "-122"));
 
-        Location location = target.get(zipCode);
+        LocationConditions locationConditions = target.get(zipCode);
 
-        assert(location != null);
-        assert(location.getCity().equals("pdx"));
-        assert(location.getTemperature().equals("72F"));
-        assert(location.getLatitude().equals("45"));
-        assert(location.getLongitude().equals("-122"));
+        assert(locationConditions != null);
+        assert(locationConditions.getCity().equals("pdx"));
+        assert(locationConditions.getTemperature().equals("72F"));
+        assert(locationConditions.getLatitude().equals("45"));
+        assert(locationConditions.getLongitude().equals("-122"));
         verify(restTemplate, times(1)).getForObject(anyString(), any());
         verify(parser, times(1)).parse(anyString());
     }
@@ -49,12 +49,12 @@ public class WeatherServiceSpec {
     public void shouldReturnUnavailableForErrors() {
         when(restTemplate.getForObject(anyString(), any())).thenThrow(RestClientException.class);
 
-        Location location = target.get(zipCode);
+        LocationConditions locationConditions = target.get(zipCode);
 
-        assert(location != null);
-        assert(location.getCity().equals("unknown"));
-        assert(location.getTemperature().equals("unavailable"));
-        assert(location.getLatitude().equals("unavailable"));
-        assert(location.getLongitude().equals("unavailable"));
+        assert(locationConditions != null);
+        assert(locationConditions.getCity().equals("unknown"));
+        assert(locationConditions.getTemperature().equals("unavailable"));
+        assert(locationConditions.getLatitude().equals("unavailable"));
+        assert(locationConditions.getLongitude().equals("unavailable"));
     }
 }

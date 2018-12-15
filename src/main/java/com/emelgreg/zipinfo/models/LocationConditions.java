@@ -1,13 +1,13 @@
 package com.emelgreg.zipinfo.models;
 
-public class Location {
+public class LocationConditions {
 
     private String name;
     private String temp;
     private String latitude;
     private String longitude;
 
-    public Location(String name, String temp, String latitude, String longitude) {
+    public LocationConditions(String name, String temp, String latitude, String longitude) {
 
         this.name = name;
         this.temp = temp;

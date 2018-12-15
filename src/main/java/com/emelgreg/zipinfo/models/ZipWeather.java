@@ -1,12 +1,12 @@
 package com.emelgreg.zipinfo.models;
 
-public class Weather {
+public class ZipWeather {
     private String city;
     private String temperature;
     private String timeZone;
     private String elevation;
 
-    public Weather(String city, String temperature, String timeZone, String elevation) {
+    public ZipWeather(String city, String temperature, String timeZone, String elevation) {
         this.city = city;
         this.temperature = temperature;
         this.timeZone = timeZone;
